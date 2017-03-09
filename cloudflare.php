@@ -102,6 +102,8 @@ class CloudFlare
         curl_setopt($ch, CURLOPT_URL, $url);
 
         $data = curl_exec($ch);
+        //Remove the IP from front of the json before converting to array
+        $data = str_replace(@reset(explode('{',$data)),'',$data);
         $error = curl_error($ch);
 
         curl_close($ch);
